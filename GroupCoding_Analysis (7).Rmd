@@ -189,7 +189,11 @@ What does the distribution of BMI scores look like for NFL players in 2016? Are 
 * Once again, use `theme_minimal()` to reduce plot clutter.
 
 ```{r BMIfaceted}
-
+ggplot(NFL, aes(x = BMI, fill = PositionGrp)) +
+  geom_density(alpha = 0.7) +
+  facet_grid(PositionGrp ~.,
+  switch = "y") + 
+  theme_minimal()
 ```
 
 
