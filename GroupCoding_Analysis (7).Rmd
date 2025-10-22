@@ -25,7 +25,9 @@ knitr::opts_chunk$set(
 ### Packages Used
 
 ```{r packages}
-
+library(tidyverse)
+library(skimr)
+library(ggbeeswarm)
 ```
 
 
@@ -37,6 +39,9 @@ Go to the [description](https://stat-jet-asu.github.io/Datasets/InstructorDescri
 
 ```{r readdata}
 dataURL <- "https://aokine.github.io/Data/NFLplayers2016.csv"
+NFL <- 
+  read_csv("https://aokine.github.io/Data/NFLplayers2016.csv")
+
 ```
 
 
@@ -45,7 +50,7 @@ dataURL <- "https://aokine.github.io/Data/NFLplayers2016.csv"
 Use `glimpse()` to explore the structure of the NFL dataset.
 
 ```{r glimpsedata}
-
+glimpse(NFL)
 ```
 
 
@@ -56,7 +61,8 @@ Body mass index (BMI) is a measure of body fat based on height and weight. The f
 We want the BMI score for each player. Calculate and add a `BMI` variable to the `NFL` dataset.
 
 ```{r BMIcalculation}
-
+NFL <- NFL %>%
+  mutate(kg = Weight*0.453592, m = Height*0.0254, BMI = kg/(m^2))
 ```
 
 
@@ -65,12 +71,14 @@ We want the BMI score for each player. Calculate and add a `BMI` variable to the
 Use the `count()` or `distinct()` function to discover the names of all the categories included in the variable `Playtime`. 
 
 ```{r playtimecats}
-
+NFL %>% count(Playtime)
 ```
 
 The default order for categories in `R` is alphanumeric order. However, the categories of `Playtime` are an ordered set representing intervals of time and they are more meaningful if they are displayed in time order. Convert the categorical variable `Playtime` into a factor variable. Make sure all of the categories are organized in the correct time order (i.e., `Rookie` should be the first category). Use the `labels =` option within `factor()` so the categories that contain `Yrs` will display `Years` (i.e., 1-4 Years).
 
 ```{r factorconvert}
+NFL$Playtime <- factor(NFL$Playtime, ordered = TRUE, levels = c("Rookie", "1-4 Yrs", "5-8 Yrs", "9-12 Yrs", "13+ Yrs"), labels = c("Rookie", "1-4 Years", "5-8 Years", "9-12 Years", "13+ Years"))
+NFL %>% count(Playtime)
 
 ```
 
@@ -113,6 +121,14 @@ How did NFL players in 2016 compare to all men in the U.S.? Create a histogram o
 * Use theme `minimal()` to reduce the clutter in the frame. Optionally, make other `theme()` changes to enhance your plot.
 
 ```{r heighthistogram}
+# add scale to the x and y axis
+ggplot(NFL, aes(Height))+
+  geom_histogram(binwidth=1, color = "black", fill = "olivedrab3") + 
+  annotate("rect", xmin=64.0, xmax=73.5, ymin=0, ymax=400, alpha=.2, fill = "steelblue1" ) + 
+  annotate("rect", xmin=67.0, xmax=71.0, ymin=0, ymax=400, alpha=.3, fill = "steelblue") + 
+  geom_vline(xintercept =  69.2, linetype = "dashed", color = "black") + 
+  labs(title="Height Distribution of NFL Players ", x="Height of NFL PLayers(in inches)", y="Count of NFL Players") + 
+  theme_minimal()
 
 ```
 
@@ -121,7 +137,8 @@ How did NFL players in 2016 compare to all men in the U.S.? Create a histogram o
 
 Based on your plot, what can you say about how the height of NFL players in 2016 compared to all men in the U.S.? What other plots or data analyses might help support your exploration of this question? Discuss.
 
-**ANSWER:** (erase this text and put your answer here) 
+**ANSWER:** 
+The median height of all US men in 2016 is denoted by a black dashed line, and compared to the distribution of NFL players, the average man falls on the lower end of the distribution. The median height of all US men is 69.50, whereas the median height of an NFL player is 74, so there is around a 5 inch difference.
 
 
 ### BMI Score Visualization
