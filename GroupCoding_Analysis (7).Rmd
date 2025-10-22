@@ -88,7 +88,7 @@ NFL %>% count(Playtime)
 Use `skim()` to explore the new structure of the NFL dataset with the added/reformatted variables.
 
 ```{r skimdata}
-
+skim(NFL)
 ```
 
 
