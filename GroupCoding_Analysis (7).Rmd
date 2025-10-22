@@ -138,8 +138,7 @@ ggplot(NFL, aes(Height))+
 Based on your plot, what can you say about how the height of NFL players in 2016 compared to all men in the U.S.? What other plots or data analyses might help support your exploration of this question? Discuss.
 
 **ANSWER:** 
-The median height of all US men in 2016 is denoted by a black dashed line, and compared to the distribution of NFL players, the average man falls on the lower end of the distribution. The median height of all US men is 69.50, whereas the median height of an NFL player is 74, so there is around a 5 inch difference.
-
+The median height of all US men in 2016 is denoted by a black dashed line, and compared to the distribution of NFL players, the average man falls on the lower end of the distribution. The median height of all US men is 69.50, whereas the median height of an NFL player is 74, and the mode height is 75, so there is around a 5-6 inch difference. The middle 90% of men fall in the bottom —% of NFL players, meaning that over 50% of NFL players are taller than the average man. To say an overall comparison, it is clear that the height of NFL players is higher than the average man. I think that it would have been useful to have another histogram of all us men's heights, and compare the histograms side to side. That could give us an easier comparison. 
 
 ### BMI Score Visualization
 
