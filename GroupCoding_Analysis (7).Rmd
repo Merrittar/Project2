@@ -1,7 +1,7 @@
 ---
 title: "Project 02: Group Coding & Analysis"
 subtitle: "STT 2860 Intro to Data Management & Visualization" 
-author: "PUT EVERYONE'S NAMES HERE"
+author: "Kira Ioffe, Mia Corcino, Ayden Passaretti, Lea Merritt"
 date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
 output: 
   html_document: 
@@ -230,7 +230,19 @@ Many people suggest that BMI is a poor measure for athletes, who often have a hi
 * Your final plot should *not* have a legend on it.
 
 ```{r playtimeboxplot}
-
+library(ggplot2)
+library(readr)
+NFL <- read_csv("https://aokine.github.io/Data/NFLplayers2016.csv")
+ggplot(NFL, aes(Playtime)) +
+  geom_bar(fill = "blue", color = "black") + 
+  scale_y_continuous(breaks = seq(0, max(table(NFL$Playtime)) + 50, by = 100)) +
+  labs(
+    title = "Distribution of Play time",
+    x = "Play time in Yrs",
+    y = "# of Players",
+    show_col_types = FALSE
+  ) +
+  theme_light()
 ```
 
 
@@ -249,6 +261,10 @@ Many people suggest that BMI is a poor measure for athletes, who often have a hi
 * Add any other formatting you feel will enhance meaning.
 
 ```{r ageviolins}
+ggplot(NFL, aes(x = Age, y = Side)) + geom_violin() + geom_boxplot(width = 2, fill = "blue", outlier.size = 6) + 
+         labs(title= "Age and Side Groups",
+              x = "Yards",
+              y = "Position")
 
 ```
 
@@ -268,12 +284,19 @@ Many people suggest that BMI is a poor measure for athletes, who often have a hi
 * Add any other formatting you feel will enhance meaning.
 
 ```{r yearsbeeswarm}
+library(ggbeeswarm)
+ggplot(NFL, aes(x = Years, y = Side)) +
+  geom_beeswarm() +
+  labs(title = "Career Time",
+       x = "Years",
+       y = "Position") +
+  theme_minimal()
 
 ``` 
 
 Assuming these data are representative, does it seem as if most NFL players can look forward to having a long career in the sport? How do your three plots above inform you about that question? What do they *not* tell you? Discuss.
 
-**ANSWER:** (erase this text and put your answer here) 
+**ANSWER:**  Based on the graphs, it looks like most NFL players only last 1-4 years. Very few NFL players make it past 13+ years.  The three plots highlight the relationship between players position and the amount of time they spend in the NFL/ their performance while doing so.
 
 
 ***
