@@ -170,7 +170,17 @@ What does the distribution of BMI scores look like for NFL players in 2016? Are 
 * Use theme `minimal()` to reduce the clutter in the frame. Optionally, make other `theme()` changes to enhance your plot.
 
 ```{r BMIdensity}
-
+ggplot(NFL, aes(BMI)) +
+geom_density(color = "darkblue", fill = "lightblue", alpha = .7) +
+geom_vline(xintercept = c(18.5, 25, 30, 35, 40), color = "grey", linetype = 4) +
+annotate("text", x = 22, y = .000, label = "Healthy", alpha = .8, size = 3.5) +
+annotate("text", x = 27.5, y = .000, label = "Overweight", alpha = .8, size = 3.5) +
+annotate("text", x = 32.5, y = .000, label = "Obese", alpha = .8, size = 3.5) +
+annotate("text", x = 37.5, y = .000, label = "Obese(Class I)", alpha = .8, size = 3.5) +
+annotate("text", x = 43, y = .000, label = "Obese(Class II)", alpha = .8, size = 3.5) +
+labs(title = "NFL BMI Rates", x = "BMI", y = "Density")+
+theme_minimal()
+theme(panel.grid.minor.y = element_blank())
 ```
 
 
@@ -203,7 +213,7 @@ ggplot(NFL, aes(x = BMI, fill = PositionGrp)) +
 
 Many people suggest that BMI is a poor measure for athletes, who often have a high body weight due to muscle mass versus fat. What do your plots suggest about this? Discuss.
 
-**ANSWER:** (erase this text and put your answer here) 
+**ANSWER:** The plots show that BMI is indeed a poor measure for athletes. Most information suggests that most athletes are overweight and nearing obesity. The graph spikes at both overweight and again at Class I obesity. Unfortunately, BMI does not include the measurement of muscle mass, instead considering body fat and muscle mass to be the same. Due to this, BMI is often an inaccurate measurement for athletes.      
 
 
 ### Age & Playtime Visualizations
